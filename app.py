@@ -1,5 +1,4 @@
 from flask import Flask
-from tchan import ChannelScraper
 app = Flask(__name__)
 menu = """
 <a href="/">Página Inicial</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
