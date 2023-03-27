@@ -1,10 +1,18 @@
 from flask import Flask
 from tchan import ChannelScraper
+from oauth2client.service_account import ServiceAccountCredentials
+import gspread
 import requests
 import os
 
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
+SHEETS_JSON = os.environ["SHEETS_JSON"]
+with open("credenciais.json", mode="w") as arquivo:
+  arquivo.writh(SHEETS_JSON)
+conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
+api = gspread.authorize(conta) # sheets.new
+planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM/edit#gid=824809877")
 app = Flask(__name__)
 menu = """
 <a href="/">Página Inicial</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
@@ -51,3 +59,7 @@ def dedoduro():
   requests.post(f"https://api.telegram.org/bot{TELEGRAM_API_KEY}/sendMessage", data = mensagem)
   return "Mensagem enviada."
 
+@app.route("/dedoduro2")
+def dedoduro2():
+  sheet.append_row(["Gabriel", "Ronan", "A partir do Flask"])
+  return "Planilha escrita!"
