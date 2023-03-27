@@ -2,3 +2,5 @@ flask
 gunicorn
 tchan
 requests
+gspread
+oAuth2Client
