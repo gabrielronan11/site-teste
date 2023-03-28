@@ -8,11 +8,14 @@ import os
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 SHEETS_JSON = os.environ["SHEETS_JSON"]
+
+SHEETS_JSON = os.environ["SHEETS_JSON"]
 with open("credenciais.json", mode="w") as arquivo:
-  arquivo.write(SHEETS_JSON)
+  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
 conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
-api = gspread.authorize(conta) # sheets.new
-planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM/edit#gid=824809877")
+api = gspread.authorize(conta)
+planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
+sheet = planilha.worksheet("Sheet1")
 app = Flask(__name__)
 menu = """
 <a href="/">Página Inicial</a> | <a href="/sobre">Sobre</a> | <a href="/contato">Contato</a>
