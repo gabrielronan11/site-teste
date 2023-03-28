@@ -5,7 +5,6 @@ import requests
 from flask import Flask, request
 from oauth2client.service_account import ServiceAccountCredentials
 from tchan import ChannelScraper
-
 TELEGRAM_API_KEY = os.environ["TELEGRAM_API_KEY"]
 TELEGRAM_ADMIN_ID = os.environ["TELEGRAM_ADMIN_ID"]
 SHEETS_JSON = os.environ["SHEETS_JSON"]
@@ -76,4 +75,3 @@ def telegram_bot():
   nova_mensagem = {"chat_id": chat_id, "text": message}
   requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
   return "ok"
-
