@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from tchan import ChannelScraper
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
@@ -66,3 +66,21 @@ def dedoduro():
 def dedoduro2():
   sheet.append_row(["Gabriel", "Ronan", "A partir do Flask"])
   return "Planilha escrita!"
+
+@app.route("/telegram-bot")
+def telegram_bot():
+  update = request.json
+  message = update["message"]["text"]
+  chat_id = update["message"]["chat"]["id"]
+  nova_mensagem = {"chat_id": chat_id, "text": message}
+  requests.post(f"https://api.telegram.org./bot{token}/sendMessage", data=nova_mensagem)
+  return "ok"
+
+@app.route("/telegram-bot")
+def telegram_bot():
+  update = request.json
+  chat_id = update["message"]["chat"]["id"]
+  message = update["message"]["text"]
+  nova_mensagem = {"chat_id": chat_id, "text": message}
+  requests.post(f"https://api.telegram.org./bot{TELEGRAM_API_KEY}/sendMessage", data=nova_mensagem)
+  return "ok"
