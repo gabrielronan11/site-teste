@@ -11,7 +11,7 @@ SHEETS_JSON = os.environ["SHEETS_JSON"]
 
 SHEETS_JSON = os.environ["SHEETS_JSON"]
 with open("credenciais.json", mode="w") as arquivo:
-  arquivo.write(GOOGLE_SHEETS_CREDENTIALS)
+  arquivo.write(SHEETS_JSON)
 conta = ServiceAccountCredentials.from_json_keyfile_name("credenciais.json")
 api = gspread.authorize(conta)
 planilha = api.open_by_key("1ZDyxhXlCtCjMbyKvYmMt_8jAKN5JSoZ7x3MqlnoyzAM")
